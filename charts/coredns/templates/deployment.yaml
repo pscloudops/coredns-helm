@@ -38,8 +38,8 @@ spec:
       maxSurge: {{ .Values.rollingUpdate.maxSurge }}
   selector:
     matchLabels:
-    {{- if .Values.overrideSelectorLabels }} 
-    {{- toYaml .Values.overrideSelectorLabels | nindent 6 }}
+    {{- if .Values.deployment.overrideSelectorLabels }} 
+    {{- toYaml .Values.deployment.overrideSelectorLabels | nindent 6 }}
     {{- else }}
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
       {{- if .Values.isClusterService }}
