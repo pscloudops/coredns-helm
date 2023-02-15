@@ -28,7 +28,6 @@ metadata:
   {{- end }}
 spec:
   selector:
-    matchLabels:
     {{- if .Values.overrideSelectorLabels }} 
     {{- toYaml .Values.overrideSelectorLabels | nindent 6 }}
     {{- else }}
