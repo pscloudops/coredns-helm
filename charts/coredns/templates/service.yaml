@@ -28,11 +28,16 @@ metadata:
   {{- end }}
 spec:
   selector:
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    {{- if .Values.isClusterService }}
-    k8s-app: {{ template "coredns.k8sapplabel" . }}
+    matchLabels:
+    {{- if .Values.overrideSelectorLabels }} 
+    {{- toYaml .Values.overrideSelectorLabels | nindent 6 }}
+    {{- else }}
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+      {{- if .Values.isClusterService }}
+      k8s-app: {{ template "coredns.k8sapplabel" . }}
+      {{- end }}
+      app.kubernetes.io/name: {{ template "coredns.name" . }}
     {{- end }}
-    app.kubernetes.io/name: {{ template "coredns.name" . }}
   {{- if .Values.service.clusterIP }}
   clusterIP: {{ .Values.service.clusterIP }}
   {{- end }}
