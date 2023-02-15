@@ -51,7 +51,7 @@ spec:
     metadata:
       labels:
       {{- if .Values.overrideSelectorLabels }} 
-      {{- toYaml .Values.overrideSelectorLabels | nindent 6 }}
+      {{- toYaml .Values.overrideSelectorLabels | nindent 8 }}
       {{- else }}      
         {{- if .Values.isClusterService }}
         k8s-app: {{ template "coredns.k8sapplabel" . }}
